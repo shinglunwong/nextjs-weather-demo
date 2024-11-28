@@ -1,6 +1,10 @@
 import axios from "axios";
 
 export async function fetchWeather(city) {
+    if (!city.trim()) {
+        throw new Error("Please enter a city name.");
+    }
+
     try {
         const API_KEY = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY;
         const response = await axios.get(
@@ -14,10 +18,12 @@ export async function fetchWeather(city) {
             }
         );
 
+        if (!response || !response.data) {
+            throw new Error("Invalid data received from API.");
+        }
+
         return response.data;
     } catch (err) {
-        console.log(err);
+        throw new Error(err.response?.data?.message || "Something went wrong.");
     }
 }
-
-// tbd: trim, error handling, loading 
