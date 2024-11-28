@@ -10,7 +10,7 @@ import styles from "@/styles/page.module.css";
 
 export default function Home() {
   // States
-  const [city, setCity] = useState("hong kong");
+  const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
