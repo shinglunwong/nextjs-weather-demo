@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SearchInput from "@/components/SearchInput";
 import WeatherCard from "@/components/WeatherCard";
+import Skeleton from "@/components/Skeleton";
 import { fetchWeather } from "@/utils/fetchWeather";
 import { formatTime } from "@/utils/formatTime";
 import styles from "@/styles/page.module.css";
@@ -46,10 +47,10 @@ export default function Home() {
         />
 
         {/* Loading State */}
-        {loading && <p>Loading...</p>}
+        {loading && <Skeleton />}
 
         {/* Error Message */}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         {/* Weather Report */}
         {!loading && !error && weatherData && (

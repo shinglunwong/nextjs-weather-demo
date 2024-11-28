@@ -4,12 +4,14 @@ import { useState } from "react";
 import styles from "../styles/SearchInput.module.css";
 
 export default function SearchInput({ city, setCity, onSearch }) {
-    const [inputValue, setInputValue] = useState(city);
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            onSearch();
+        }
+    };
 
     const handleChange = (e) => {
-        const value = e.target.value;
-        setInputValue(value);
-        setCity(value)
+        setCity(e.target.value);
     };
 
     return (
@@ -17,12 +19,13 @@ export default function SearchInput({ city, setCity, onSearch }) {
             <input
                 type="text"
                 placeholder="Enter city"
-                value={inputValue}
+                value={city}
                 onChange={handleChange}
+                onKeyPress={handleKeyPress}
                 className={styles.input}
             />
             <button onClick={onSearch} className={styles.button}>
-                Search
+                Enter
             </button>
         </div>
     );
