@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <header className={styles.header}>
-          <h1>Next.js Weather App </h1>
+          <h1>Instant Weather Report</h1>
         </header>
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>

@@ -1,8 +1,9 @@
 .header {
-    background-color: #225be4;
+    background: linear-gradient(135deg, #225be4, #4d8fff); 
     color: white;
-    padding: 16px;
+    padding: 20px 16px; 
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .main {
