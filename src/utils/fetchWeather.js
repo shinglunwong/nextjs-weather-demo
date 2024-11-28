@@ -22,8 +22,27 @@ export async function fetchWeather(city) {
             throw new Error("Invalid data received from API.");
         }
 
-        return response.data;
+        return normalizeWeatherData(response.data);
     } catch (err) {
         throw new Error(err.response?.data?.message || "Something went wrong.");
+    }
+}
+export function normalizeWeatherData(data) {
+    const iconCode = data.weather?.[0]?.icon;
+
+    return {
+        cityName: data.name,
+        temp: data.main?.temp,
+        feelsLike: data.main?.feels_like,
+        tempMax: data.main?.temp_max,
+        tempMin: data.main?.temp_min,
+        humidity: data.main?.humidity,
+        weatherMain: data.weather?.[0]?.main,
+        weatherDescription: data.weather?.[0]?.description,
+        windSpeed: data.wind?.speed,
+        windDegree: data.wind?.deg,
+        sunrise: data.sys?.sunrise,
+        sunset: data.sys?.sunset,
+        iconUrl: `https://openweathermap.org/img/wn/${iconCode || ""}@2x.png`,
     }
 }

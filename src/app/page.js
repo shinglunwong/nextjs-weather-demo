@@ -31,10 +31,6 @@ export default function Home() {
     }
   };
 
-  // Variables
-  const iconCode = weatherData?.weather[0]?.icon;
-  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
   return (
     <>
       <h2 className={styles.title}>What’s the Weather Like?</h2>
@@ -55,25 +51,28 @@ export default function Home() {
         {/* Weather Report */}
         {!loading && !error && weatherData && (
           <>
-            {loading && <Skeleton />}
             <section className={styles.displayContainer} aria-label="Weather Report">
-              <h3 className={styles.city}>{weatherData?.name}</h3>
-              <img src={iconUrl} alt={weatherData?.weather[0]?.description || "Weather icon"} className={styles.icon} />
-              <h1 className={styles.temperature}>{weatherData?.main?.temp}°C</h1>
+              <h3 className={styles.city}>{weatherData.cityName}</h3>
+              <img
+                src={weatherData.iconUrl}
+                alt={weatherData.weatherDescription || "Weather icon"}
+                className={styles.icon}
+              />
+              <h1 className={styles.temperature}>{weatherData.temp}°C</h1>
               <p className={styles.description}>
-                {weatherData?.weather?.[0]?.main} - {weatherData?.weather?.[0]?.description}
+                {weatherData.weatherMain} - {weatherData.weatherDescription}
               </p>
               <p className={styles.highLow}>
-                H: {weatherData?.main?.temp_max}°C L: {weatherData?.main?.temp_min}°C
+                H: {weatherData.tempMax}°C L: {weatherData.tempMin}°C
               </p>
             </section>
             <div className={styles.cardsContainer}>
-              <WeatherCard title="Feels Like" value={weatherData?.main?.feels_like} unit="°C" />
-              <WeatherCard title="humidity" value={weatherData?.main?.humidity} unit="%" />
-              <WeatherCard title="Wind Speed" value={weatherData?.wind?.speed} unit="m/s" />
-              <WeatherCard title="Wind Degree" value={weatherData?.wind?.deg} unit="°" />
-              <WeatherCard title="Sunrise" value={formatTime(weatherData?.sys?.sunrise)} />
-              <WeatherCard title="Sunset" value={formatTime(weatherData?.sys?.sunset)} />
+              <WeatherCard title="Feels Like" value={weatherData.feelsLike} unit="°C" />
+              <WeatherCard title="Humidity" value={weatherData.humidity} unit="%" />
+              <WeatherCard title="Wind Speed" value={weatherData.windSpeed} unit="m/s" />
+              <WeatherCard title="Wind Degree" value={weatherData.windDegree} unit="°" />
+              <WeatherCard title="Sunrise" value={formatTime(weatherData.sunrise)} />
+              <WeatherCard title="Sunset" value={formatTime(weatherData.sunset)} />
             </div>
           </>
         )}
